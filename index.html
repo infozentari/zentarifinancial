@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zentari Financial Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal: #0a9b9b;
+  --teal-dark: #077a7a;
+  --teal-light: #e0f5f5;
+  --navy: #0d2d3a;
+  --gold: #c8963a;
+  --white: #ffffff;
+  --off-white: #f7fafa;
+  --gray: #6b7280;
+  --light-gray: #f1f5f5;
+  --border: #d1e8e8;
+  --text: #1a2e35;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%;
+  height: 70px;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 0.7rem;
+  text-decoration: none;
+}
+
+.nav-logo-icon {
+  width: 42px; height: 42px;
+  border: 2px solid var(--teal);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+}
+
+.nav-logo-text {
+  display: flex; flex-direction: column; line-height: 1.1;
+}
+
+.nav-logo-name {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.nav-logo-sub {
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--teal);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex; gap: 2rem; list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--teal); }
+
+.nav-btn {
+  background: var(--teal);
+  color: var(--white);
+  padding: 0.6rem 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none; cursor: pointer;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+}
+.nav-btn:hover { background: var(--teal-dark); transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--navy) 0%, #0d4a5a 50%, #0a6e7a 100%);
+  position: relative;
+  display: flex; align-items: center;
+  overflow: hidden;
+  padding: 100px 5% 60px;
+}
+
+.hero-bg-pattern {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(10,155,155,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(10,155,155,0.1) 0%, transparent 40%),
+    radial-gradient(circle at 60% 80%, rgba(200,150,58,0.08) 0%, transparent 30%);
+  pointer-events: none;
+}
+
+/* Grid lines decoration */
+.hero-bg-pattern::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(10,155,155,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,155,155,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center; width: 100%;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(10,155,155,0.2);
+  border: 1px solid rgba(10,155,155,0.4);
+  color: #5dd5d5;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: rise 0.8s ease-out 0.3s forwards;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: rise 0.9s ease-out 0.5s forwards;
+}
+
+.hero-title-sub {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 600;
+  color: var(--teal);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: rise 0.9s ease-out 0.65s forwards;
+}
+
+.hero-tagline {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.7);
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+  max-width: 460px;
+  opacity: 0;
+  animation: rise 0.9s ease-out 0.8s forwards;
+}
+
+.hero-tagline em {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  color: #7de0e0;
+}
+
+.hero-actions {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0;
+  animation: rise 0.9s ease-out 1s forwards;
+}
+
+.btn-hero-primary {
+  background: var(--teal);
+  color: var(--white);
+  padding: 0.9rem 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none; cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+  border-radius: 2px;
+}
+.btn-hero-primary:hover { background: #0bbdbd; transform: translateY(-2px); }
+
+.btn-hero-ghost {
+  background: transparent;
+  color: var(--white);
+  padding: 0.9rem 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s, background 0.2s;
+  border-radius: 2px;
+}
+.btn-hero-ghost:hover { border-color: var(--teal); background: rgba(10,155,155,0.1); }
+
+/* Hero stats */
+.hero-stats {
+  display: flex; gap: 2rem; margin-top: 3rem;
+  opacity: 0;
+  animation: rise 0.9s ease-out 1.2s forwards;
+}
+
+.stat {
+  display: flex; flex-direction: column; gap: 0.2rem;
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.03em;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Hero card panel */
+.hero-panel {
+  opacity: 0;
+  animation: rise-right 1s ease-out 0.7s forwards;
+}
+
+.panel-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(10,155,155,0.3);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 4px;
+  position: relative;
+}
+
+.panel-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--gold));
+  border-radius: 4px 4px 0 0;
+}
+
+.panel-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1.5rem;
+}
+
+.how-step {
+  display: flex; gap: 1rem; align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.how-step:last-child { margin-bottom: 0; }
+
+.step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-body {}
+
+.step-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.2rem;
+}
+
+.step-desc {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 400;
+}
+
+.step-connector {
+  width: 2px; height: 20px;
+  background: rgba(10,155,155,0.3);
+  margin-left: 15px;
+  margin-bottom: 0;
+}
+
+/* ── TRUST BAR ── */
+.trust-bar {
+  background: var(--navy);
+  padding: 1.5rem 5%;
+  display: flex; align-items: center; justify-content: center;
+  gap: 3rem; flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.05em;
+}
+
+.trust-item span { font-size: 1rem; }
+
+/* ── SERVICES ── */
+.services {
+  padding: 7rem 5%;
+  background: var(--white);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: var(--teal-light);
+  padding: 0.35rem 1rem;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  color: var(--gray);
+  font-weight: 400;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  border-radius: 4px;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--gold));
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(10,155,155,0.12);
+  border-color: rgba(10,155,155,0.3);
+}
+
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-icon {
+  width: 48px; height: 48px;
+  background: var(--teal-light);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  transition: background 0.3s;
+}
+
+.service-card:hover .service-icon { background: var(--teal); }
+.service-card:hover .service-icon span { filter: brightness(10); }
+
+.service-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 0.6rem;
+}
+
+.service-desc {
+  font-size: 0.77rem;
+  color: var(--gray);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ── HOW WE WORK ── */
+.how {
+  background: var(--navy);
+  padding: 7rem 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.how::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(10,155,155,0.12) 0%, transparent 60%);
+}
+
+.how-inner {
+  max-width: 1200px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+
+.how .section-title { color: var(--white); }
+.how .section-subtitle { color: rgba(255,255,255,0.6); }
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.how-steps::before {
+  content: '';
+  position: absolute;
+  top: 2rem; left: calc(16.5% + 2rem); right: calc(16.5% + 2rem);
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--gold), var(--teal));
+  opacity: 0.3;
+}
+
+.how-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(10,155,155,0.2);
+  padding: 2.5rem 2rem;
+  border-radius: 4px;
+  text-align: center;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.how-card:hover {
+  border-color: rgba(10,155,155,0.5);
+  background: rgba(10,155,155,0.06);
+}
+
+.how-num {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--white);
+  font-size: 1.2rem;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 0 0 8px rgba(10,155,155,0.15);
+}
+
+.how-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+
+.how-card-desc {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+/* ── WHY CHOOSE US ── */
+.why {
+  padding: 7rem 5%;
+  background: var(--off-white);
+}
+
+.why-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+
+.why-text .section-header { text-align: left; }
+.why-text .section-subtitle { margin: 0; }
+
+.why-list {
+  margin-top: 2.5rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+
+.why-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+}
+
+.why-check {
+  width: 22px; height: 22px;
+  background: var(--teal);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white);
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.why-item-text {
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.why-item-text span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--gray);
+  font-weight: 400;
+  margin-top: 0.15rem;
+}
+
+/* Pillars grid */
+.pillars {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.pillar {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  border-radius: 4px;
+  text-align: center;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.pillar:hover {
+  box-shadow: 0 10px 30px rgba(10,155,155,0.1);
+  transform: translateY(-3px);
+}
+
+.pillar-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.pillar-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.3rem;
+}
+
+.pillar-sub {
+  font-size: 0.73rem;
+  color: var(--gray);
+  font-weight: 400;
+}
+
+/* ── CONTACT ── */
+.contact {
+  background: linear-gradient(135deg, var(--navy) 0%, #0d4a5a 100%);
+  padding: 7rem 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(10,155,155,0.12) 0%, transparent 60%);
+}
+
+.contact-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: start;
+  position: relative; z-index: 1;
+}
+
+.contact .section-title { color: var(--white); text-align: left; }
+.contact .section-subtitle { color: rgba(255,255,255,0.6); text-align: left; }
+
+.contact-details {
+  margin-top: 2.5rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+
+.contact-item {
+  display: flex; gap: 1rem; align-items: center;
+}
+
+.contact-icon {
+  width: 40px; height: 40px;
+  background: rgba(10,155,155,0.2);
+  border: 1px solid rgba(10,155,155,0.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.contact-info {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+
+.contact-info small {
+  display: block;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+  font-weight: 400;
+  margin-top: 0.1rem;
+}
+
+/* Contact form */
+.contact-form {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(10,155,155,0.25);
+  padding: 2.5rem;
+  border-radius: 4px;
+}
+
+.form-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1.8rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(10,155,155,0.25);
+  color: var(--white);
+  padding: 0.75rem 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--teal);
+  background: rgba(10,155,155,0.08);
+}
+
+.form-group select option { background: var(--navy); color: var(--white); }
+
+.form-group textarea { resize: vertical; min-height: 90px; }
+
+.btn-submit {
+  width: 100%;
+  background: var(--teal);
+  color: var(--white);
+  padding: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none; cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 0.5rem;
+}
+.btn-submit:hover { background: #0bbdbd; transform: translateY(-1px); }
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+  color: var(--teal);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #071e28;
+  padding: 2rem 5%;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+  border-top: 1px solid rgba(10,155,155,0.2);
+}
+
+.footer-tagline {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+}
+
+.footer-tagline strong {
+  font-style: normal;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.footer-copy {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes rise-right {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Mobile */
+@media (max-width: 900px) {
+  nav { padding: 0 4%; }
+  .nav-links { display: none; }
+  .hero { padding: 90px 4% 50px; }
+  .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-panel { display: none; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .how-steps { grid-template-columns: 1fr; }
+  .how-steps::before { display: none; }
+  .why-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .trust-bar { gap: 1.5rem; }
+  footer { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 600px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🐘</div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">Zentari</span>
+      <span class="nav-logo-sub">Financial Services</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How We Work</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-btn">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">🐘 &nbsp; Established · Trusted · Reputable</div>
+      <h1 class="hero-title">ZENTARI<br>FINANCIAL<br>SERVICES</h1>
+      <p class="hero-title-sub">Financial Services</p>
+      <p class="hero-tagline">
+        <em>Bridging the Gap Between Clients and Reputable Service Providers.</em><br><br>
+        We connect you with the right financial experts, partners, and solutions — so you can focus on what matters most.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-hero-primary">Our Services</a>
+        <a href="#contact" class="btn-hero-ghost">Contact Us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">8+</span>
+          <span class="stat-label">Services</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">100%</span>
+          <span class="stat-label">Confidential</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">Fast</span>
+          <span class="stat-label">Turnaround</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-panel">
+      <div class="panel-card">
+        <div class="panel-title">⚡ How We Work</div>
+        <div class="how-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Understand Your Needs</div>
+            <div class="step-desc">We listen carefully and analyze your situation</div>
+          </div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="how-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Match You with Trusted Providers</div>
+            <div class="step-desc">Fast & reliable connections from our network</div>
+          </div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="how-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Deliver Results</div>
+            <div class="step-desc">Success guaranteed — we stay until it's done</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span>🤝</span> Trusted Network</div>
+  <div class="trust-item"><span>⚡</span> Fast Service Delivery</div>
+  <div class="trust-item"><span>🔒</span> Secure & Confidential</div>
+  <div class="trust-item"><span>👔</span> Professional Expert Team</div>
+  <div class="trust-item"><span>🌍</span> Zimbabwe & Beyond</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header reveal">
+    <span class="section-tag">What We Offer</span>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-subtitle">Comprehensive financial and business solutions designed to move you forward.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal" style="transition-delay:0.05s">
+      <div class="service-icon"><span>📣</span></div>
+      <div class="service-name">Referral & B2C Marketing Solutions</div>
+      <div class="service-desc">We connect your business with the right clients through strategic referral networks and marketing.</div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.1s">
+      <div class="service-icon"><span>📊</span></div>
+      <div class="service-name">Financial Advisory & Consulting</div>
+      <div class="service-desc">Expert guidance to help you make informed financial decisions and grow your wealth confidently.</div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.15s">
+      <div class="service-icon"><span>📒</span></div>
+      <div class="service-name">Accounting & Bookkeeping</div>
+      <div class="service-desc">Accurate, up-to-date financial records so you always know exactly where your business stands.</div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.2s">
+      <div class="service-icon"><span>🧾</span></div>
+      <div class="service-name">Taxation Services & Compliance</div>
+      <div class="service-desc">Stay compliant and minimize your tax burden with our professional tax preparation and filing services.</div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.25s">
+      <div class="service-icon"><span>🏢</span></div>
+      <div class="service-name">Company Registration & Secretarial</div>
+      <div class="service-desc">Fast, hassle-free company registration and ongoing secretarial support to keep you legally compliant.</div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.3s">
+      <div class="service-icon"><span>🛡️</span></div>
+      <div class="service-name">Insurance & Investment Guidance</div>
+      <div class="service-desc">Protect what matters and grow what you have — with the right insurance and investment strategies.</div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.35s">
+      <div class="service-icon"><span>💰</span></div>
+      <div class="service-name">Loan & Credit Assistance</div>
+      <div class="service-desc">Navigate the lending landscape with confidence. We help you access the credit you need, faster.</div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.4s">
+      <div class="service-icon"><span>🤝</span></div>
+      <div class="service-name">Business Networking & Partnerships</div>
+      <div class="service-desc">Expand your reach through our curated network of reputable businesses and strategic partners.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">Our Process</span>
+      <h2 class="section-title">How We Work</h2>
+      <p class="section-subtitle">A simple, transparent three-step process built around your needs.</p>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-card reveal" style="transition-delay:0.1s">
+        <div class="how-num">1</div>
+        <div class="how-card-title">Understand Your Needs</div>
+        <div class="how-card-desc">We start by listening — really listening. We take time to understand your financial situation, goals, and challenges before recommending anything.</div>
+      </div>
+      <div class="how-card reveal" style="transition-delay:0.2s">
+        <div class="how-num">2</div>
+        <div class="how-card-title">Match You with Trusted Providers</div>
+        <div class="how-card-desc">Using our extensive network, we identify and connect you with the most suitable, reputable service providers. Fast and reliable.</div>
+      </div>
+      <div class="how-card reveal" style="transition-delay:0.3s">
+        <div class="how-num">3</div>
+        <div class="how-card-title">Deliver Results</div>
+        <div class="how-card-desc">We stay involved to ensure successful outcomes. Our commitment doesn't end at the introduction — we see it through to success.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why" id="why">
+  <div class="why-inner">
+    <div class="why-text">
+      <div class="section-header">
+        <span class="section-tag">Why Zentari</span>
+        <h2 class="section-title">Why Choose Us?</h2>
+        <p class="section-subtitle">We're more than a financial intermediary — we're your long-term partner in growth and success.</p>
+      </div>
+      <div class="why-list reveal">
+        <div class="why-item">
+          <div class="why-check">✓</div>
+          <div class="why-item-text">Access to a vetted, trusted provider network
+            <span>Every partner in our network is carefully screened for quality and reliability.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-check">✓</div>
+          <div class="why-item-text">One point of contact for all your financial needs
+            <span>No more chasing multiple firms — we coordinate everything for you.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-check">✓</div>
+          <div class="why-item-text">Strict confidentiality on all engagements
+            <span>Your financial information is handled with the highest level of discretion.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-check">✓</div>
+          <div class="why-item-text">Results-oriented — we only succeed when you do
+            <span>Our reputation depends on delivering real, measurable outcomes for clients.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillars reveal" style="transition-delay:0.2s">
+      <div class="pillar">
+        <span class="pillar-icon">🤝</span>
+        <div class="pillar-title">Trusted</div>
+        <div class="pillar-sub">Reputable Network</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">⚡</span>
+        <div class="pillar-title">Fast</div>
+        <div class="pillar-sub">Service Delivery</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🔒</span>
+        <div class="pillar-title">Secure</div>
+        <div class="pillar-sub">Confidential</div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">👔</span>
+        <div class="pillar-title">Professional</div>
+        <div class="pillar-sub">Expert Team</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-header" style="text-align:left; margin-bottom:0;">
+        <span class="section-tag">Reach Out</span>
+        <h2 class="section-title">Let Us Connect You to the Right Solutions</h2>
+        <p class="section-subtitle">Ready to take the next step? Get in touch and let's find the right solution for your needs.</p>
+      </div>
+      <div class="contact-details reveal">
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-info">
+            info@zentarifinancialservices.co.zw
+            <small>Email us anytime</small>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-info">
+            +263 XXXX XXX XXX
+            <small>Mon – Fri, 8am – 5pm</small>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌍</div>
+          <div class="contact-info">
+            Zimbabwe
+            <small>Serving clients locally & regionally</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form reveal" style="transition-delay:0.2s" id="contactForm">
+      <div class="form-title">Send Us a Message</div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="John Doe"/>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="john@example.com"/>
+      </div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Referral & B2C Marketing</option>
+          <option>Financial Advisory & Consulting</option>
+          <option>Accounting & Bookkeeping</option>
+          <option>Taxation Services & Compliance</option>
+          <option>Company Registration & Secretarial</option>
+          <option>Insurance & Investment Guidance</option>
+          <option>Loan & Credit Assistance</option>
+          <option>Business Networking & Partnerships</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us a little about what you need..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="submitForm()">Send Message →</button>
+      <div class="form-success" id="formSuccess">
+        ✅ Thank you! We'll be in touch shortly.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-tagline">
+    <strong>Your Trusted Partner</strong> in Financial Growth &amp; Business Success!
+  </div>
+  <div class="footer-copy">© 2026 Zentari Financial Services. All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Form submit
+  function submitForm() {
+    const btn = document.querySelector('.btn-submit');
+    btn.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
